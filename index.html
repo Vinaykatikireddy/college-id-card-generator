@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Dimension Block</title>
+    <title>ID card Generator</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,10 +12,48 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 40px;
             min-height: 100vh;
             margin: 0;
+            padding: 20px;
             background-color: #f0f2f5;
             font-family: sans-serif;
+            flex-wrap: wrap;
+        }
+        .form-container {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        .form-container h2 {
+            margin: 0 0 16px;
+            font-size: 18px;
+            text-align: center;
+            color: #333;
+        }
+        .form-container label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #444;
+        }
+        .form-container input,
+        .form-container select {
+            width: 100%;
+            padding: 8px 10px;
+            margin-bottom: 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .form-container input:focus,
+        .form-container select:focus {
+            outline: none;
+            border-color: red;
         }
         .id-card {
             width: min(295px, 95vw);
@@ -29,15 +67,24 @@
             overflow: hidden;
             flex-shrink: 0;
         }
+        .blackball {
+            width: 100%;
+            height: calc(80% + 4px);
+            background-color: black;
+            border-radius: 4mm 4mm 50% 50%;
+            margin-bottom: 96px;
+        }
+        .whiteball {
+            width: 100%;
+            height: 98%;
+            background-color: white;
+            border-radius: 4mm 4mm 50% 50%;
+        }
         .redball {
             width: 100%;
-            height: 80%;
+            height: 98%;
             background-color: red;
-            /* border: black 1px solid; */
             border-radius: 4mm 4mm 50% 50%;
-            margin-bottom: 100px;
-            border-bottom: white 4px solid;
-            box-shadow: 0 4px 0 0 black;
         }
         .college-name {
             font-size: clamp(18px, 9vw, 30px);
@@ -90,7 +137,6 @@
             transform: translateX(-50%);
             width: 100%;
             height: 150px;
-            /* border: 3px solid rgb(255, 0, 251); */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -113,6 +159,12 @@
             border-radius: 16px;
             object-fit: cover;
             margin-right: 47px;
+            overflow: hidden;
+        }
+        .student-photo img {
+            width: 100%;
+            height: 123%;
+            border-radius: 16px;
         }
         .blood-drop {
             width: 25px;
@@ -175,29 +227,58 @@
     </style>
 </head>
 <body>
+    <div class="form-container">
+        <h2>Generate ID Card</h2>
+        <label for="regId">Registration ID</label>
+        <input type="text" id="regId" placeholder="e.g. 26A21A05ZZ">
+
+        <label for="name">Student Name</label>
+        <input type="text" id="name" placeholder="Your name">
+
+        <label for="programme">Programme</label>
+        <input type="text" id="programme" placeholder="B.Tech - CSE-D">
+
+        <label for="batch">Batch</label>
+        <input type="text" id="batch" value="2024-2028" readonly>
+
+        <label for="mobile">Mobile Number</label>
+        <input type="tel" id="mobile" placeholder="e.g. 9000000000">
+
+        <label for="address">Address</label>
+        <input type="text" id="address" placeholder="e.g. Seetharamapuram, Narsapur, AP 534275">
+
+        <button id="downloadBtn" style="width:100%;padding:10px;background:red;color:white;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;margin-top:4px;">Download ID Card</button>
+    </div>
+
     <div class="id-card">
-        <div class="redball">
-            <div class="college-name">SWARNANDHRA</div>
-            <div class="college-sub-name">COLLEGE OF ENGINEERING AND TECHNOLOGY</div>
-            <div class="college-autonomous">(AUTONOMOUS)</div>
-            <div class="college-address">SEETHARAMPURAM, NARSAPUR - 534280,W.G.Dt.,A.P.</div>
-            <div class="student-id">STUDENT ID CARD</div>
+        <div class="blackball">
+            <div class="whiteball">
+                <div class="redball">
+                    <div class="college-name">SWARNANDHRA</div>
+                    <div class="college-sub-name">COLLEGE OF ENGINEERING AND TECHNOLOGY</div>
+                    <div class="college-autonomous">(AUTONOMOUS)</div>
+                    <div class="college-address">SEETHARAMPURAM, NARSAPUR - 534280,W.G.Dt.,A.P.</div>
+                    <div class="student-id">STUDENT ID CARD</div>
+                </div>
+            </div>
         </div>
 
         <div class="main">
             <span class="vertical-text">B.TECH.</span>
-            <img class="student-photo" src="24A21A05N0.jpg" alt="Student Photo">
+            <div class="student-photo">
+                <img id="studentPhoto" alt="Enter regid to fetch image">
+            </div>
             <img class="blood-drop" src="blood-drop.jpg" alt="blood-drop">
         </div>
 
-        <h4 class="name">K A NAGA RAJA VINAY</h4>
+        <h4 class="name" id="studentName">STUDENT NAME</h4>
 
         <div class="student-info">
             <div class="details">
-                <span>24A21A05N0</span>
-                <span>B.TECH - CSE-D</span>
-                <span>2024-2028</span>
-                <span>9493386116</span>
+                <span id="studentRegId">XXA2XXXXXX</span>
+                <span id="studentProgramme">B.TECH - XX</span>
+                <span id="studentBatch">XXXX-XXXX</span>
+                <span id="studentMobile">XXXXXXXXXX</span>
             </div>
             <div class="college-logo">
                 <img src="download.png" alt="swrn-logo">
@@ -206,9 +287,64 @@
             </div>
         </div>
 
-        <div class="address">
-            malikipuram
+        <div class="address" id="studentAddress">
+            ADDRESS
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        const regIdInput = document.getElementById('regId');
+        const nameInput = document.getElementById('name');
+        const programmeInput = document.getElementById('programme');
+        const mobileInput = document.getElementById('mobile');
+        const addressInput = document.getElementById('address');
+
+        const cardPhoto = document.getElementById('studentPhoto');
+        const cardName = document.getElementById('studentName');
+        const cardRegId = document.getElementById('studentRegId');
+        const cardProgramme = document.getElementById('studentProgramme');
+        const cardBatch = document.getElementById('studentBatch');
+        const cardMobile = document.getElementById('studentMobile');
+        const cardAddress = document.getElementById('studentAddress');
+
+        regIdInput.addEventListener('input', function () {
+            const regId = this.value.trim().toUpperCase();
+            cardRegId.textContent = regId || 'XX00XX00X0';
+            if (regId.length === 10) {
+                cardPhoto.src = 'https://vinaykatikireddy-portfolio.hf.space/image/' + regId + '.jpg';
+            }
+        });
+
+        nameInput.addEventListener('input', function () {
+            cardName.textContent = this.value.trim() || 'YOUR NAME';
+        });
+
+        programmeInput.addEventListener('change', function () {
+            cardProgramme.textContent = this.value.toUpperCase();
+        });
+
+        mobileInput.addEventListener('input', function () {
+            cardMobile.textContent = this.value.trim() || 'XXXXXXXXXX';
+        });
+
+        addressInput.addEventListener('input', function () {
+            cardAddress.textContent = this.value.trim() || 'Address';
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', function () {
+            const card = document.querySelector('.id-card');
+            html2canvas(card, { scale: 4, useCORS: true }).then(function (canvas) {
+                const { jsPDF } = window.jspdf;
+                const ratio = canvas.width / canvas.height;
+                const pdfW = 85.6;
+                const pdfH = pdfW / ratio;
+                const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: [pdfW, pdfH] });
+                pdf.addImage(canvas.toDataURL('image/jpeg', 1.0), 'JPEG', 0, 0, pdfW, pdfH);
+                pdf.save('ID_Card_' + (regIdInput.value.trim() || 'student') + '.pdf');
+            });
+        });
+    </script>
 </body>
 </html>
