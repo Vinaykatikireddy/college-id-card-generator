@@ -239,7 +239,10 @@
         <input type="text" id="programme" placeholder="B.Tech - CSE-D">
 
         <label for="batch">Batch</label>
-        <input type="text" id="batch" value="2024-2028" readonly>
+        <select id="batch">
+            <option value="2024-2028">2024-2028</option>
+            <option value="2025-2028">2025-2028</option>
+        </select>
 
         <label for="mobile">Mobile Number</label>
         <input type="tel" id="mobile" placeholder="e.g. 9000000000">
@@ -323,6 +326,12 @@
 
         programmeInput.addEventListener('change', function () {
             cardProgramme.textContent = this.value.toUpperCase();
+        });
+
+        const batchInput = document.getElementById('batch');
+        cardBatch.textContent = batchInput.value;
+        batchInput.addEventListener('change', function () {
+            cardBatch.textContent = this.value || 'XXXX-XXXX';
         });
 
         mobileInput.addEventListener('input', function () {
