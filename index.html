@@ -66,6 +66,7 @@
             position: relative;
             overflow: hidden;
             flex-shrink: 0;
+            border-color: white;
         }
         .blackball {
             width: 100%;
@@ -97,7 +98,6 @@
             font-size: clamp(7px, 3vw, 10px);
             color: white;
             text-align: center;
-            margin: 0;
             font-weight: bold;
             font-weight: 900;
         }
@@ -116,7 +116,7 @@
             text-align: center;
             margin-top: 3px;
             font-weight: bold;
-            font-weight: 400;
+            
             mask: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
         }
         .student-id {
@@ -176,7 +176,7 @@
         }
         .name {
             /* border: black 1px solid; */
-            margin: 0 20px 10px 20px;
+            margin: -30px 20px 10px 20px;
             color: red;
             text-align: center;
             letter-spacing: 1px;
@@ -191,7 +191,7 @@
             justify-content: space-between;
         }
         .details {
-            width: 60%;
+            width: 80%;
             font-size: clamp(9px, 3.5vw, 16px);
             display: flex;
             flex-direction: column;
@@ -223,6 +223,7 @@
             align-items: center;
             justify-content: center;
             font-size: clamp(9px, 4vw, 12px);
+            text-align: center;
         }
     </style>
 </head>
@@ -239,10 +240,7 @@
         <input type="text" id="programme" placeholder="B.Tech - CSE-D">
 
         <label for="batch">Batch</label>
-        <select id="batch">
-            <option value="2024-2028">2024-2028</option>
-            <option value="2025-2028">2025-2028</option>
-        </select>
+        <input type="text" id="batch" placeholder="2024-2028">
 
         <label for="mobile">Mobile Number</label>
         <input type="tel" id="mobile" placeholder="e.g. 9000000000">
@@ -260,7 +258,7 @@
                     <div class="college-name">SWARNANDHRA</div>
                     <div class="college-sub-name">COLLEGE OF ENGINEERING AND TECHNOLOGY</div>
                     <div class="college-autonomous">(AUTONOMOUS)</div>
-                    <div class="college-address">SEETHARAMPURAM, NARSAPUR - 534280,W.G.Dt.,A.P.</div>
+                    <div class="college-address">SEETHARAMPURAM, NARSAPUR - 534 280,W.G.Dt., A.P.</div>
                     <div class="student-id">STUDENT ID CARD</div>
                 </div>
             </div>
@@ -280,7 +278,7 @@
             <div class="details">
                 <span id="studentRegId">XXA2XXXXXX</span>
                 <span id="studentProgramme">B.TECH - XX</span>
-                <span id="studentBatch">XXXX-XXXX</span>
+                <span id="studentBatch">20XX-20XX</span>
                 <span id="studentMobile">XXXXXXXXXX</span>
             </div>
             <div class="college-logo">
@@ -291,7 +289,7 @@
         </div>
 
         <div class="address" id="studentAddress">
-            ADDRESS
+            Address
         </div>
     </div>
 
@@ -301,6 +299,7 @@
         const regIdInput = document.getElementById('regId');
         const nameInput = document.getElementById('name');
         const programmeInput = document.getElementById('programme');
+        const batchInput = document.getElementById('batch');
         const mobileInput = document.getElementById('mobile');
         const addressInput = document.getElementById('address');
 
@@ -327,11 +326,9 @@
         programmeInput.addEventListener('change', function () {
             cardProgramme.textContent = this.value.toUpperCase();
         });
-
-        const batchInput = document.getElementById('batch');
-        cardBatch.textContent = batchInput.value;
-        batchInput.addEventListener('change', function () {
-            cardBatch.textContent = this.value || 'XXXX-XXXX';
+        
+        batchInput.addEventListener('input', function () {
+            cardBatch.textContent = this.value.toUpperCase();
         });
 
         mobileInput.addEventListener('input', function () {
